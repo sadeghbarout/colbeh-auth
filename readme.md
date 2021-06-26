@@ -5,7 +5,7 @@
         
 2- Add config file
         
-        php artisan vendor:publish --provider="Colbeh\Consts\ServiceProvider" --tag=config
+        php artisan vendor:publish --provider="Colbeh\Auth\ServiceProvider" --tag=config
 
 3- Go to config/auth_colbeh and modify that
 
