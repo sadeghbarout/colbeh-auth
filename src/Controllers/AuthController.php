@@ -81,7 +81,7 @@ class AuthController {
 		$user[Col::otpLastDate()] = Helper::getServerDateTime();
 		$user->save();
 
-		$phoneOrEmail = $user[Col::phoneNumber()];
+		$phoneOrEmail = $user[Col::phoneNumberOrEmail()];
 		Helper::getSender($phoneOrEmail)::sendValidation($phoneOrEmail, $otpCode);
 		return $user;
 	}
@@ -137,7 +137,7 @@ class AuthController {
 	 */
 	private function sendValidation($user, $phoneOrEmail) {
 		$otpCode = Helper::generateOtpCode();
-		$user[Col::phoneNumber()] = $phoneOrEmail;
+		$user[Col::phoneNumberOrEmail()] = $phoneOrEmail;
 		$user[Col::otp()] = $otpCode;
 		$user[Col::otpTryCount()] = 0;
 		$user[Col::otpLastDate()] = Helper::getServerDateTime();
@@ -257,7 +257,7 @@ class AuthController {
 		$user[Col::otpLastDate()] = Helper::getServerDateTime();
 		$user->save();
 
-		$phoneOrEmail=$user[Col::phoneNumber()];
+		$phoneOrEmail=$user[Col::phoneNumberOrEmail()];
 		Helper::getSender($phoneOrEmail)::sendValidation($phoneOrEmail, $otpCode);
 		return $user;
 	}
@@ -296,7 +296,7 @@ class AuthController {
 		$user[Col::otpLastDate()] = Helper::getServerDateTime();
 		$user->save();
 
-		$phoneOrEmail=$user[Col::phoneNumber()];
+		$phoneOrEmail=$user[Col::phoneNumberOrEmail()];
 		Helper::getSender($phoneOrEmail)::sendForgetPass($phoneOrEmail, $otpCode);
 		return $user;
 	}
@@ -346,15 +346,15 @@ class AuthController {
 
 
 	/**
-	 * @param $phonenumber
+	 * @param $phonenumberOrEmail
 	 *
 	 * @return Model
 	 */
-	public function loginOrSignUp($phonenumber) {
+	public function loginOrSignUp($phonenumberOrEmail) {
 
-		$user=$this->getUser($phonenumber,false);
+		$user=$this->getUser($phonenumberOrEmail,false);
 		if ($user==null) {
-			$user = $this->SignUpUserWithPhone($phonenumber);
+			$user = $this->SignUpUserWithPhone($phonenumberOrEmail);
 		}else{
 			$user= $this->sendValidation2($user);
 		}
@@ -363,14 +363,14 @@ class AuthController {
 	}
 
 	/**
-	 * @param $phonenumber
+	 * @param $phonenumberOrEmail
 	 *
 	 * @return Model
 	 */
-	private function SignUpUserWithPhone($phonenumber) {
+	private function SignUpUserWithPhone($phonenumberOrEmail) {
 		$model = $this->getModel();
 		$user = new $model;
-		$user[Col::phoneNumber()] = $phonenumber;
+		$user[Col::phoneNumberOrEmail()] = $phonenumberOrEmail;
 		$user->save();
 
 		$user = $this->sendValidation2($user);
@@ -390,7 +390,7 @@ class AuthController {
 		$user[Col::otpLastDate()] = Helper::getServerDateTime();
 		$user->save();
 
-		$phoneOrEmail = $user[Col::phoneNumber()];
+		$phoneOrEmail = $user[Col::phoneNumberOrEmail()];
 		Helper::getSender($phoneOrEmail)::sendValidation($phoneOrEmail, $otpCode);
 		return $user;
 	}
@@ -420,7 +420,7 @@ class AuthController {
 		$model = $this->getModel();
 
 		if(Config::type($this->provider) == "otp")
-			$user = $model->where(Col::phoneNumber(), $username)->first();
+			$user = $model->where(Col::phoneNumberOrEmail(), $username)->first();
 		else
 			$user = $model->where(Col::username(), $username)->first();
 

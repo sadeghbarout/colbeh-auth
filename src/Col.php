@@ -13,7 +13,7 @@ class Col {
 
 	public static function username() {return config('auth_colbeh.COL_USERNAME');}
 	public static function password() {return config('auth_colbeh.COL_PASSWORD');}
-	public static function phoneNumber() {return config('auth_colbeh.COL_PHONE_NUMBER_OR_EMAIL');}
+	public static function phoneNumberOrEmail() {return config('auth_colbeh.COL_PHONE_NUMBER_OR_EMAIL');}
 	public static function otp() {return config('auth_colbeh.COL_OTP');}
 	public static function otpTryCount() {return config('auth_colbeh.COL_OTP_TRY_COUNT');}
 	public static function otpLastDate() {return config('auth_colbeh.COL_OTP_LAST_DATE');}
