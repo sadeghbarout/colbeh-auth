@@ -16,7 +16,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		$this->loadViewsFrom(__DIR__ . '/Views', 'const');
 
 		$this->publishes([
-			__DIR__.'/auth_colbeh.php' => config_path(''),
+			__DIR__.'/auth_colbeh.php' => config_path('auth_colbeh.php'),
 		], 'config');
 
 	}
