@@ -113,3 +113,5 @@ login or sign up user with phone number or email.In this method, system will sen
 ```php
 $auth->loginOrSignUp($phonenumberOrEmail)
 ```
+
+
