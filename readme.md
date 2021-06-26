@@ -1,4 +1,4 @@
-#Installation: 
+# Installation: 
 
 1- Composer require colbeh/auth
 
@@ -10,15 +10,15 @@
 3- Go to config/auth_colbeh and modify that
 
 
-#Upgrade:
+# Upgrade:
         composer require colbeh/auth:x.x.x
 
 
 
-#Guide
+# Guide
 
 
-###providers:
+### Providers:
 you can set multiple provider for different methods of login and signup
 each provider contains:
 
@@ -45,7 +45,7 @@ $auth=new AuthController('user')
 
 
 
-###Validation
+### Validation
 you can validate user by email or phone . 
 1- Introduce your class of sms sender in auth_colbeh as SMSSenderClass key
 note that SMSSenderClass class should extends from SmsSenderInterface interface
@@ -57,46 +57,46 @@ note that EmailSenderClass class should extends from EmailSenderInterface interf
  
  
  
-###Usage
+### Usage
 
-####initialize : 
+#### Initialize : 
 ```php
 $auth=new AuthController()
 ```
 
-####login: 
+#### Login: 
 login with username and password
 ```php
 $auth->login($username, $password)
 ```
 
-####signUp: 
+#### SignUp: 
 sign up with username and password
 ```php
 $auth->signUp($username, $password, $phoneOrEmail)
 ```
 
-####validate: 
+#### Validate: 
 send validation email or sms for user
 ```php
 $auth->validate($username, $code)
 ```
 
-####resendCode: 
+#### ResendCode: 
 resend validation code
 ```php
 $auth->resendCode($username)
 ```
 
 
-####forgetPass:
+#### ForgetPass:
  this method send an email or sms for recovery password
 ```php
 $auth->forgetPass($username)
 ```
 
 
-####recoveryPass: 
+#### RecoveryPass: 
 this method used for recovery (change) password after getting code from user
 user can set his new password 
 ```php
@@ -108,7 +108,7 @@ if user not set password, system will create new password
 $newPass=$auth->recoveryPass($username,$code)
 ```
 
-####loginOrSignUp: 
+#### LoginOrSignUp: 
 login or sign up user with phone number or email.In this method, system will send a validation code and you should use validate method to validate user 
 ```php
 $auth->loginOrSignUp($phonenumberOrEmail)
